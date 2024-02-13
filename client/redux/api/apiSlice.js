@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:8000/",
+  baseUrl: "https://ai-prompt-du96.onrender.com/",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -26,7 +26,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
     // send refresh token to get new access token
     const refreshResult = await baseQuery(
-      "http://localhost:8000/users/refresh",
+      "/users/refresh",
       api,
       extraOptions
     );
