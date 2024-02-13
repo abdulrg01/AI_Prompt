@@ -1,5 +1,3 @@
-const allowOrigins = [
-    'http://localhost:3000'
-]
+const allowOrigins = ["https://ai-prompt-tan.vercel.app"];
 
-module.exports = allowOrigins
+module.exports = allowOrigins;
