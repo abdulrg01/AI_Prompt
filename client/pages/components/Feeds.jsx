@@ -43,9 +43,7 @@ export default function Feeds() {
                   return val;
                 }
               })
-              ?.map((item, index) => (
-                <PromptCard key={index} item={item} isLoading={isLoading} />
-              ))}
+              ?.map((item, index) => <PromptCard key={index} item={item} />)}
         </section>
       )}
     </>

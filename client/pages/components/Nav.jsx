@@ -21,7 +21,6 @@ export default function Nav() {
   const [toggleDropDown, setToggleDropDown] = useState(false);
   const [socialAuth] = useSocialAuthMutation();
   const [sendLogout] = useSendLogoutMutation();
-  const user = data?.user;
 
   useEffect(() => {
     const verifyRefreshToken = async () => {
@@ -36,12 +35,6 @@ export default function Nav() {
 
     if (!token) verifyRefreshToken();
   }, []);
-
-  useEffect(() => {
-    if (data) {
-      dispatch(setUser({ user }));
-    }
-  }, [data]);
 
   useEffect(() => {
     if (session) {
