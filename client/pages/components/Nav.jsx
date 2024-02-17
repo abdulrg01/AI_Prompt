@@ -56,117 +56,111 @@ export default function Nav() {
   }, [session]);
 
   return (
-    <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <nav className="flex-between w-full mb-16 pt-3">
-          <Link href="/" className="flex gap-2 flex-center">
-            <img
-              src="/favicon.ico"
-              alt="nav"
-              className=" object-contain w-[35px] h-[35px]"
-            />
-            <p className="logo_text">AI Prompt</p>
-          </Link>
+    <nav className="flex-between w-full mb-16 pt-3">
+      <Link href="/" className="flex gap-2 flex-center">
+        <img
+          src="/favicon.ico"
+          alt="nav"
+          className=" object-contain w-[35px] h-[35px]"
+        />
+        <p className="logo_text">AI Prompt</p>
+      </Link>
 
-          {/* Desktop navigation */}
-          <div className="sm:flex hidden">
-            {status === "authenticated" ? (
-              <div className="flex gap-3 md:gap-5">
-                <Link href="/createPrompt" className="black_btn">
-                  Create New Post
+      {/* Desktop navigation */}
+      <div className="sm:flex hidden">
+        {status === "authenticated" ? (
+          <div className="flex gap-3 md:gap-5">
+            <Link href="/createPrompt" className="black_btn">
+              Create New Post
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                signOut();
+                sendLogout;
+              }}
+              className="outline_btn"
+            >
+              Sign Out
+            </button>
+            <Link href="/profile">
+              {/* Real user img */}
+              <img
+                src={session?.user.image}
+                className="w-[30px] h-[30px] rounded-full"
+                alt="profile"
+              />
+            </Link>
+          </div>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => {
+                signIn("google");
+              }}
+              className="black_btn"
+            >
+              Sign In
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* mobile navigation */}
+      <div className="sm:hidden flex relative">
+        {status === "authenticated" ? (
+          <div className="flex">
+            <img
+              src={session?.user.image}
+              className="w-[30px] h-[30px] rounded-full"
+              alt="profile"
+              onClick={() => setToggleDropDown((prev) => !prev)}
+            />
+            {toggleDropDown && (
+              <div className="dropdown">
+                <Link
+                  href="/profile"
+                  className="dropdown_link"
+                  onClick={() => setToggleDropDown(false)}
+                >
+                  My Profile
+                </Link>
+                <Link
+                  href="/createPrompt"
+                  className="dropdown_link"
+                  onClick={() => setToggleDropDown(false)}
+                >
+                  Create Prompt
                 </Link>
                 <button
                   type="button"
                   onClick={() => {
+                    setToggleDropDown(false);
                     signOut();
                     sendLogout;
                   }}
-                  className="outline_btn"
+                  className="mt-5 w-full black_btn"
                 >
                   Sign Out
                 </button>
-                <Link href="/profile">
-                  {/* Real user img */}
-                  <img
-                    src={session?.user.image}
-                    className="w-[30px] h-[30px] rounded-full"
-                    alt="profile"
-                  />
-                </Link>
               </div>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  onClick={() => {
-                    signIn("google");
-                  }}
-                  className="black_btn"
-                >
-                  Sign In
-                </button>
-              </>
             )}
           </div>
-
-          {/* mobile navigation */}
-          <div className="sm:hidden flex relative">
-            {status === "authenticated" ? (
-              <div className="flex">
-                <img
-                  src={session?.user.image}
-                  className="w-[30px] h-[30px] rounded-full"
-                  alt="profile"
-                  onClick={() => setToggleDropDown((prev) => !prev)}
-                />
-                {toggleDropDown && (
-                  <div className="dropdown">
-                    <Link
-                      href="/profile"
-                      className="dropdown_link"
-                      onClick={() => setToggleDropDown(false)}
-                    >
-                      My Profile
-                    </Link>
-                    <Link
-                      href="/createPrompt"
-                      className="dropdown_link"
-                      onClick={() => setToggleDropDown(false)}
-                    >
-                      Create Prompt
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setToggleDropDown(false);
-                        signOut();
-                        sendLogout;
-                      }}
-                      className="mt-5 w-full black_btn"
-                    >
-                      Sign Out
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  onClick={() => {
-                    signIn("google");
-                  }}
-                  className="black_btn"
-                >
-                  Sign In
-                </button>
-              </>
-            )}
-          </div>
-        </nav>
-      )}
-    </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={() => {
+                signIn("google");
+              }}
+              className="black_btn"
+            >
+              Sign In
+            </button>
+          </>
+        )}
+      </div>
+    </nav>
   );
 }
