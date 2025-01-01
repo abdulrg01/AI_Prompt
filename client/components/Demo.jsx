@@ -58,19 +58,13 @@ const Demo = () => {
   };
 
   return (
-    <section className="mt-16 w-full max-w-xl">
+    <section className="py-5 w-full max-w-xl">
       {/* Search */}
       <div className="flex flex-col w-full gap-2">
         <form
-          className="relative flex justify-center items-center"
+          className="max-w-lg mx-auto pb-5 flex h-auto flex-row w-full justify-center items-center gap-2"
           onSubmit={handleSubmit}
         >
-          <img
-            src="/assets/link.svg"
-            alt="link-icon"
-            className="absolute left-0 my-2 ml-3 w-5"
-          />
-
           <input
             type="url"
             placeholder="Paste the article link"
@@ -78,18 +72,18 @@ const Demo = () => {
             onChange={(e) => setArticle({ ...article, url: e.target.value })}
             onKeyDown={handleKeyDown}
             required
-            className="url_input peer" // When you need to style an element based on the state of a sibling element, mark the sibling with the peer class, and use peer-* modifiers to style the target element
+            className="block w-full p-3 shadow-sm text-sm text-white bg-slate-900 border border-gray-700 transition-colors  min-w-[35%] font-poppins rounded-md"
           />
           <button
             type="submit"
-            className="submit_btn peer-focus:border-gray-700 peer-focus:text-gray-700 "
+            className="p-3 shadow-sm  font-semibold text-sm text-white bg-slate-900 border border-gray-700 rounded-md hover:bg-slate-800 disabled:cursor-not-allowed"
           >
             <p>↵</p>
           </button>
         </form>
 
         {/* Browse History */}
-        <div className="flex flex-col gap-1 max-h-60 overflow-y-auto">
+        <div className="flex flex-col gap-1 max-h-60 overflow-y-auto px-8">
           {allArticles.reverse().map((item, index) => (
             <div
               key={`link-${index}`}
@@ -104,10 +98,10 @@ const Demo = () => {
                       : "/assets/copy.svg"
                   }
                   alt={copied === item.url ? "tick_icon" : "copy_icon"}
-                  className="w-[40%] h-[40%] object-contain"
+                  className="w-[20px] h-[20px] object-contain"
                 />
               </div>
-              <p className="flex-1 font-satoshi text-blue-700 font-medium text-sm truncate">
+              <p className="flex-1 font-satoshi text-blue-700 font-medium text-sm truncate cursor-pointer">
                 {item.url}
               </p>
             </div>
@@ -116,7 +110,7 @@ const Demo = () => {
       </div>
 
       {/* Display Result */}
-      <div className="my-10 max-w-full flex justify-center items-center">
+      <div className="my-10 max-w-full flex justify-center items-center px-8">
         {isFetching ? (
           <img
             src="/assets/loader.svg"
@@ -137,7 +131,7 @@ const Demo = () => {
               <h2 className="font-satoshi font-bold text-gray-600 text-xl">
                 Article <span className="blue_gradient">Summary</span>
               </h2>
-              <div className="summary_box">
+              <div className="max-w-lg w-full">
                 <p className="font-inter font-medium text-sm text-gray-700">
                   {article.summary}
                 </p>
